@@ -10,8 +10,28 @@ brew install fzf
 ```shell
 branch_action.sh
 ```
-3. .zshrcでエイリアスを貼る
+3. `.zshrc`でエイリアスを貼る
 ```shell
 // .zshrc
 alias gb='~/任意の場所/branch_action.sh'
+```
+
+### git add, git reset 編
+> キーワード検索でステージング、アンステージングできるスクリプト
+1. 以下のファイルを任意の場所に置く
+```shell
+git_add.sh
+git_reset.sh
+```
+2. `.zshrc`でエイリアスを貼る
+```shell
+alias ga='~/任意の場所/git_add.sh'
+alias gres='~/任意の場所/git_reset.sh'
+```
+3. コマンドの後にキーワードを入れて実行する
+```shell
+// 例えば拡張子がjsのものだけaddする場合
+ga js
+// 逆に、拡張子がjsのものだけunstageする場合
+gres js
 ```

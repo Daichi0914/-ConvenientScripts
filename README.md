@@ -1,7 +1,7 @@
-# 便利コマンド事始め
+# Getting Started
 
-## git branch action script
-### `branch_action.sh`
+### ブランチ操作編
+> ブランチを選択し、選択したブランチに対してアクションを実行するスクリプト
 1. fzfをinstall
 ```shell
 brew install fzf
@@ -15,4 +15,3 @@ branch_action.sh
 // .zshrc
 alias gb='~/任意の場所/branch_action.sh'
 ```
-

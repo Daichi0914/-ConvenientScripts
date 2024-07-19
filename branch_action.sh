@@ -26,7 +26,7 @@ echo "$branches"
 # ブランチをfzfで選択
 selected_branch=$(
     echo "$branches" | awk '/origin\// {print "'"$orange"'" $0 "'"$reset"'"} !/origin\// {print $0}' | \
-    fzf --height 20 --layout=reverse --ansi --border --prompt="Select a branch: " --bind "j:down,k:up" --no-multi
+    fzf --height 20 --layout=reverse --ansi --border --prompt="Select a branch: " --bind "j:down,k:up,ctrl-c:abort,q:abort" --no-multi
 ) || { cleanup; }
 
 # 選択したブランチ名を表示
@@ -44,7 +44,7 @@ fi
 # 選択したブランチに対するGit操作を選択
 action=$(
     echo -e "$actions" | \
-    fzf --height 20 --layout=reverse --border --prompt="Select an action: " --bind "j:down,k:up" --no-multi
+    fzf --height 20 --layout=reverse --border --prompt="Select an action: " --bind "j:down,k:up,ctrl-c:abort,q:abort" --no-multi
 ) || { cleanup; }
 
 # 選択したアクション名を表示

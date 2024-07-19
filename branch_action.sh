@@ -25,8 +25,8 @@ echo "$branches"
 
 # ブランチをfzfで選択
 selected_branch=$(
-	echo "$branches" | awk '/origin\// {print "'"$orange"'" $0 "'"$reset"'"} !/origin\// {print $0}' | \
-	fzf --height 20 --layout=reverse --ansi --border --prompt="Select a branch: " --bind "j:down,k:up" --no-multi
+    echo "$branches" | awk '/origin\// {print "'"$orange"'" $0 "'"$reset"'"} !/origin\// {print $0}' | \
+    fzf --height 20 --layout=reverse --ansi --border --prompt="Select a branch: " --bind "j:down,k:up" --no-multi
 ) || { cleanup; }
 
 # 選択したブランチ名を表示
@@ -35,7 +35,7 @@ echo "SELECTED: $selected_branch"
 echo "==============================="
 
 # アクション一覧を定義
-actions="switch\ndelete\nmerge\ncherry-pick"
+actions="switch\ndelete\nmerge\ncherry-pick\nrename"
 if [[ $selected_branch == origin/* ]]; then
     actions="$actions\ncheckout(local)"
 fi
@@ -43,8 +43,8 @@ fi
 
 # 選択したブランチに対するGit操作を選択
 action=$(
-	echo -e "$actions" | \
-	fzf --height 20 --layout=reverse --border --prompt="Select an action: " --bind "j:down,k:up" --no-multi
+    echo -e "$actions" | \
+    fzf --height 20 --layout=reverse --border --prompt="Select an action: " --bind "j:down,k:up" --no-multi
 ) || { cleanup; }
 
 # 選択したアクション名を表示
@@ -82,6 +82,11 @@ case $action in
         for hash in $selected_hashes; do
             git cherry-pick $hash
         done
+        ;;
+    rename)
+        read -p "New branch name: " new_branch_name
+        git branch -m "$selected_branch" "$new_branch_name"
+        echo "Renamed: $selected_branch -> $new_branch_name"
         ;;
     checkout\(local\))
         local_branch=$(echo "$selected_branch" | sed 's/^origin\///')

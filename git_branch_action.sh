@@ -19,13 +19,13 @@ echo CURRENT: $(git branch --show-current)
 echo "==============================="
 
 # ブランチの一覧を取得
-branches=$(git branch -a --format="%(refname:short)")
-
-echo "$branches"
+local_branches=$(git branch --format="%(refname:short)")
+echo "$local_branches"
 
 # ブランチをfzfで選択
+all_branches=$(git branch -a --format="%(refname:short)")
 selected_branch=$(
-    echo "$branches" | awk '/origin\// {print "'"$orange"'" $0 "'"$reset"'"} !/origin\// {print $0}' | \
+    echo "$all_branches" | awk '/origin\// {print "'"$orange"'" $0 "'"$reset"'"} !/origin\// {print $0}' | \
     fzf --height 20 --layout=reverse --ansi --border --prompt="Select a branch: " --bind "j:down,k:up,ctrl-c:abort,q:abort" --no-multi
 ) || { cleanup; }
 

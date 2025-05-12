@@ -28,6 +28,9 @@ alias gb='~/任意の場所/git_branch_action.sh'
 
 ### git add, git reset 編
 > キーワード検索でステージング、アンステージングできるスクリプト
+
+![Image](https://github.com/user-attachments/assets/4b252a75-9cc7-4930-88e4-926ba0c71fa3)
+
 1. 以下のファイルを任意の場所に置く（クローンする）
 ```shell
 git_add.sh

@@ -2,7 +2,9 @@
 
 ### ブランチ操作編
 > ブランチを選択し、選択したブランチに対してアクションを実行するスクリプト
+
 ![Image](https://github.com/user-attachments/assets/b611ad1f-2aac-4efb-a7b4-665abf10d8e2)
+
 1. fzfをinstall
 ```shell
 brew install fzf
